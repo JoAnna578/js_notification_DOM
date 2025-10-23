@@ -1,14 +1,15 @@
 'use strict';
 
-const pushNotification = (posTop, posRight, titleText, descriptionText, type) => {
+const pushNotification = (coordinates, titleText, descriptionText, type) => {
+  const { top, right } = coordinates;
+
   // Tworzymy element powiadomienia
   const notification = document.createElement('div');
   notification.classList.add('notification', type);
 
-  // Ustawiamy pozycję
-  notification.style.position = 'absolute';
-  notification.style.top = `${posTop}px`;
-  notification.style.right = `${posRight}px`;
+  // Ustawiamy tylko wymagane style top i right
+  notification.style.top = `${top}px`;
+  notification.style.right = `${right}px`;
 
   // Tworzymy tytuł
   const title = document.createElement('h2');
@@ -19,7 +20,7 @@ const pushNotification = (posTop, posRight, titleText, descriptionText, type) =>
   const description = document.createElement('p');
   description.textContent = descriptionText;
 
-  // Dodajemy dzieci do powiadomienia
+  // Dodajemy tytuł i opis do powiadomienia
   notification.appendChild(title);
   notification.appendChild(description);
 
@@ -32,26 +33,23 @@ const pushNotification = (posTop, posRight, titleText, descriptionText, type) =>
   }, 2000);
 };
 
-// Wywołania przykładowych powiadomień
+// Wywołania powiadomień
 pushNotification(
-  10,
-  10,
+  { top: 10, right: 10 },
   'Title of Success message',
   'Message example.\n Notification should contain title and description.',
   'success',
 );
 
 pushNotification(
-  150,
-  10,
+  { top: 150, right: 10 },
   'Title of Error message',
   'Message example.\n Notification should contain title and description.',
   'error',
 );
 
 pushNotification(
-  290,
-  10,
+  { top: 290, right: 10 },
   'Title of Warning message',
   'Message example.\n Notification should contain title and description.',
   'warning',
